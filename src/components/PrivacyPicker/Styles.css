@@ -1,5 +1,6 @@
 .PrivacyPicker {
   position: relative;
+  color: #fff;
 }
 
 .PrivacyPicker_Btn img {
@@ -18,7 +19,8 @@
   display: flex;
   align-items: center;
   font-weight: 800;
-  color: rgb(27, 149, 224);
+  /* color: rgb(27, 149, 224); */
+  color: #fff;
 }
 
 .PrivacyPicker_Btn:hover {

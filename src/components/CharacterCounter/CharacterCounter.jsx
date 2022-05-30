@@ -11,8 +11,9 @@ export const CharacterCounter = ({ maxChars }) => {
     plainText,
     maxChars
   );
-
+    
   return (
+
     <div data-ui={uiStatus} className="ProgressRingBar">
       <ProgressRingBar {...propsRingBar} />
     </div>

@@ -6,16 +6,16 @@ import { limitTo } from "./utils/limitTo";
 
 import "./Styles.css";
 
-export const WhatsHappeningBar = ({ maxChars }) => {
+export const WhatsHappeningBar = ({ maxChars,addNewFeed }) => {
   return (
-    <div className="WhatsHappeningBar">
+    <div className="WhatsHappeningBar" style={{"border":'2px solid #fff'}}>
       <Collection
         object
         name="editor"
         validators={[limitTo(maxChars)]}
         reducers={extractPlainText}
       >
-        <DraftEditor name="editorState" maxChars={maxChars} />
+        <DraftEditor name="editorState" maxChars={maxChars} addNewFeed={addNewFeed} />
         <Input type="hidden" name="plainText" />
       </Collection>
     </div>

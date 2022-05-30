@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo, useRef } from "react";
 import { composeDecorators } from "./utils/composeDecorators";
 import { useField } from "usetheform";
-import { Editor, EditorState } from "draft-js";
+import { Editor, EditorState, convertToRaw } from "draft-js";
 
-export const DraftEditor = ({ maxChars, name = "editorState" }) => {
+export const DraftEditor = ({ maxChars, name = "editorState" ,addNewFeed}) => {
   const initialState = useMemo(
     () => EditorState.createEmpty(composeDecorators(maxChars)),
     [maxChars]
@@ -12,12 +12,27 @@ export const DraftEditor = ({ maxChars, name = "editorState" }) => {
   const { value, setValue } = useField({
     type: "custom",
     name,
-    value: initialState
+    value: initialState,
   });
 
-  const onInputChange = useCallback((editorState) => setValue(editorState), [
-    setValue
-  ]);
+  const onInputChange = useCallback(
+    (editorState) => {
+      setValue(editorState);
+
+      const data = convertToRaw(editorState.getCurrentContent());
+      const lastElement = data.blocks.slice(-2);
+      
+      if (lastElement.length === 2) {
+      
+        if (lastElement[0].text === "" && lastElement[1].text === "") {
+          console.log("Matched");
+          addNewFeed();
+        }
+      }
+    },
+
+    [setValue]
+  );
 
   /* 
      field used to hold the draft's ref 
@@ -28,7 +43,7 @@ export const DraftEditor = ({ maxChars, name = "editorState" }) => {
   useField({
     type: "custom",
     name: "refEditor",
-    value: refEditor
+    value: refEditor,
   });
 
   return (
