@@ -22,16 +22,17 @@ export const DraftEditor = ({ maxChars, name = "editorState" ,addNewFeed}) => {
       const data = convertToRaw(editorState.getCurrentContent());
       const lastElement = data.blocks.slice(-2);
       
+      console.log(lastElement.length)
       if (lastElement.length === 2) {
       
-        if (lastElement[0].text === "" && lastElement[1].text === "") {
-          console.log("Matched");
+        if (lastElement[0].text === '' && lastElement[1].text === '') {
+          
           addNewFeed();
         }
       }
     },
 
-    [setValue]
+    [setValue,addNewFeed]
   );
 
   /* 

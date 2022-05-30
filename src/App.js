@@ -23,6 +23,7 @@ export default function App() {
   const dragStart = (e, position) => {
     dragItem.current = position;
     console.log(e.target.innerHTML);
+    console.log(addToIndex);
   };
 
   const dragEnter = (e, position) => {
@@ -44,8 +45,9 @@ export default function App() {
     setFeeds(feeds + 1);
     setAddToIndex(index);
   };
+  
   useEffect(() => {
-    console.log(allFeeds);
+    // console.log(allFeeds);
     setAllFeeds(Array.from(Array(feeds).keys()));
   }, [feeds]);
 
@@ -53,10 +55,7 @@ export default function App() {
     <div className="App">
       {allFeeds &&
         allFeeds.map((feed, index) => (
-          <div
-            style={{ padding: "20px", border: "2px solid #fff" }}
-            key={index}
-          >
+          <div key={index}>
             <Form
               onSubmit={onSubmit}
               onDragStart={(e) => dragStart(e, index)}
